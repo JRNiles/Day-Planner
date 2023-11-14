@@ -50,4 +50,19 @@ $(function () {
     // Append the time block to the container
     timeBlockContainer.append(timeBlock);
   });
+
+  // Add a listener for click events on the save button
+  $(".saveBtn").on("click", function () {
+    // Get the parent time-block element's ID
+    var timeBlockId = $(this).parent().attr("id");
+
+    // Get the user input from the description textarea
+    var userEvent = $(this).siblings(".description").val();
+
+    // Save the user input in local storage using the time block ID as the key
+    localStorage.setItem(timeBlockId, userEvent);
+  });
+
+  
+
 });
