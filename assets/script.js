@@ -86,4 +86,14 @@ $(function () {
 
   // Call the updateTimeBlocks function to set initial colors
   updateTimeBlocks();
+
+  // Get any user input that was saved in localStorage and set the textarea values
+  $(".time-block").each(function () {
+    var timeBlockId = $(this).attr("id");
+    var savedEvent = localStorage.getItem(timeBlockId);
+    $(this).children(".description").val(savedEvent);
+  });
+
+  // Update the time-block colors every minute to reflect the current time
+  setInterval(updateTimeBlocks, 60000);
 });
