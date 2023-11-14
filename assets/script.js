@@ -63,6 +63,27 @@ $(function () {
     localStorage.setItem(timeBlockId, userEvent);
   });
 
-  
+  // Function to update the time-blocks' colors based on the current time
+  function updateTimeBlocks() {
+    // Get the current hour in 24-hour time
+    var currentHour = dayjs().format("H");
 
+    // Loop through each time-block
+    $(".time-block").each(function () {
+      // Get the hour from the time-block's ID
+      var blockHour = parseInt($(this).attr("id").split("-")[1]);
+
+      // Compare the block's hour to the current hour and add the appropriate class
+      if (blockHour < currentHour) {
+        $(this).removeClass("present future").addClass("past");
+      } else if (blockHour == currentHour) {
+        $(this).removeClass("past future").addClass("present");
+      } else {
+        $(this).removeClass("past present").addClass("future");
+      }
+    });
+  }
+
+  // Call the updateTimeBlocks function to set initial colors
+  updateTimeBlocks();
 });
